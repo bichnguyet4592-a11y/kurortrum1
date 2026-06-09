@@ -43,7 +43,7 @@ export default function HomePage() {
       </section>
 
       <footer style={{ background: 'white', borderTop: '1px solid #e5e7eb', padding: '24px', textAlign: 'center', fontSize: '14px', color: '#6b7280' }}>
-        © 2024 Курортрум · Жильё на Кавказских Минеральных Водах
+        © 2026 Курортрум · Жильё на Кавказских Минеральных Водах
       </footer>
     </main>
   )

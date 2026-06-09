@@ -23,17 +23,23 @@ export default function CatalogPage() {
       url += `&city=eq.${encodeURIComponent(city)}`
     }
     const res = await fetch(url, {
-      headers: {
-        'apikey': SUPA_KEY,
-        'Authorization': `Bearer ${SUPA_KEY}`,
-      },
+      headers: { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` },
     })
     const data = await res.json()
     setProperties(Array.isArray(data) ? data : [])
     setLoading(false)
   }
+
   return (
     <main style={{ fontFamily: 'sans-serif', background: '#f9fafb', minHeight: '100vh' }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .catalog-grid { grid-template-columns: 1fr !important; }
+          .filters-row { flex-direction: column !important; gap: 12px !important; }
+          .catalog-pad { padding: 16px !important; }
+        }
+      `}</style>
+
       <nav style={{ background: 'white', borderBottom: '1px solid #e5e7eb', padding: '16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <a href="/" style={{ fontSize: '20px', fontWeight: 600, textDecoration: 'none', color: '#111827' }}>
           Курорт<span style={{ color: '#059669' }}>рум</span>
@@ -43,23 +49,23 @@ export default function CatalogPage() {
         </a>
       </nav>
 
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '32px 24px' }}>
+      <div className="catalog-pad" style={{ maxWidth: '1100px', margin: '0 auto', padding: '32px 24px' }}>
         <h1 style={{ fontSize: '22px', fontWeight: 600, marginBottom: '24px' }}>Жильё на КМВ</h1>
 
-        <div style={{ background: 'white', border: '1px solid #e5e7eb', borderRadius: '12px', padding: '20px', marginBottom: '24px', display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
-          <div>
+        <div className="filters-row" style={{ background: 'white', border: '1px solid #e5e7eb', borderRadius: '12px', padding: '20px', marginBottom: '24px', display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+          <div style={{ flex: 1, minWidth: '140px' }}>
             <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>Город</div>
-            <select value={city} onChange={e => setCity(e.target.value)} style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '8px 12px', fontSize: '14px' }}>
+            <select value={city} onChange={e => setCity(e.target.value)} style={{ width: '100%', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '8px 12px', fontSize: '14px' }}>
               {CITIES.map(c => <option key={c}>{c}</option>)}
             </select>
           </div>
-          <div>
+          <div style={{ flex: 1, minWidth: '140px' }}>
             <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>Цена до: {maxPrice} ₽</div>
-            <input type="range" min={500} max={10000} step={500} value={maxPrice} onChange={e => setMaxPrice(Number(e.target.value))} style={{ width: '160px' }} />
+            <input type="range" min={500} max={10000} step={500} value={maxPrice} onChange={e => setMaxPrice(Number(e.target.value))} style={{ width: '100%' }} />
           </div>
-          <div>
+          <div style={{ minWidth: '80px' }}>
             <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>Гостей</div>
-            <input type="number" min={1} max={20} value={guests} onChange={e => setGuests(Number(e.target.value))} style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '8px 12px', fontSize: '14px', width: '80px' }} />
+            <input type="number" min={1} max={20} value={guests} onChange={e => setGuests(Number(e.target.value))} style={{ width: '100%', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '8px 12px', fontSize: '14px' }} />
           </div>
         </div>
 
@@ -72,11 +78,11 @@ export default function CatalogPage() {
             <div style={{ fontSize: '14px' }}>Попробуй изменить фильтры</div>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
+          <div className="catalog-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
             {properties.map(p => (
               <a key={p.id} href={`/property/${p.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div style={{ background: 'white', border: '1px solid #e5e7eb', borderRadius: '12px', overflow: 'hidden' }}>
-                  <div style={{ height: '180px', background: '#d1fae5', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '48px' }}>
+                  <div style={{ height: '200px', background: '#d1fae5', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '48px' }}>
                     {p.property_images?.[0]?.url
                       ? <img src={p.property_images[0].url} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       : '🏠'}

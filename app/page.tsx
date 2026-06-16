@@ -365,7 +365,7 @@ export default function HomePage() {
         }
 
         .owner-subtitle {
-          color: rgba(255,255,255,0.60);
+          color: rgba(255,255,255,0.50);
           font-size: 16px;
           margin: 0 0 32px;
         }
@@ -382,7 +382,7 @@ export default function HomePage() {
           display: flex;
           align-items: center;
           gap: 8px;
-          color: rgba(255,255,255,0.80);
+          color: rgba(255,255,255,0.60);
           font-size: 14px;
         }
 
@@ -459,11 +459,12 @@ export default function HomePage() {
 
       {/* NAV */}
       <nav className="nav-transparent">
-        <a href="/" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', lineHeight: 1.1 }}>
-          <span style={{ fontSize: '22px', fontWeight: 800, color: 'white', letterSpacing: '-0.03em', fontFamily: 'inherit' }}>
-            Курорт<span style={{ color: '#2BAE8E' }}>рум</span>
-          </span>
-          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.08em', fontFamily: 'inherit' }}>жильё на КМВ</span>
+        <a href="/" style={{ textDecoration: 'none' }}>
+          <img
+            src="/logo.png"
+            alt="Курортрум — жильё на КМВ"
+            style={{ height: '48px', width: 'auto', filter: 'brightness(0) invert(1)' }}
+          />
         </a>
         <div className="nav-desktop-links" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
           <a href="/catalog" className="nav-link">Жильё</a>
@@ -510,7 +511,7 @@ export default function HomePage() {
             <div className="search-divider" />
             <svg className="search-icon" width="18" height="18" fill="none" stroke="#9ca3af" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
             <select className="search-select" value={type} onChange={e => setType(e.target.value)}>
-              <option value="">Любой тип</option>
+              <option value="">Тип жилья</option>
               <option>Квартира</option>
               <option>Дом</option>
               <option>Апартаменты</option>
@@ -626,9 +627,7 @@ export default function HomePage() {
       {/* FOOTER */}
       <footer style={{ borderTop: '1px solid #e9e9e9', padding: '28px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', background: 'white' }}>
         <a href="/" style={{ textDecoration: 'none' }}>
-          <span style={{ fontSize: '18px', fontWeight: 800, color: '#0F4C5C', letterSpacing: '-0.02em' }}>
-            Курорт<span style={{ color: '#2BAE8E' }}>рум</span>
-          </span>
+          <img src="/logo.png" alt="Курортрум" style={{ height: '36px', width: 'auto' }} />
         </a>
         <span style={{ fontSize: '13px', color: '#9ca3af' }}>
           © 2026 · Жильё на Кавказских Минеральных Водах

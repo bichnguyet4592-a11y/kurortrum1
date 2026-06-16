@@ -31,8 +31,9 @@ export default function HomePage() {
           position: absolute;
           top: 0; left: 0; right: 0;
           z-index: 10;
-          background: linear-gradient(to bottom, rgba(0,0,0,0.50) 0%, transparent 100%);
-          padding: 20px 40px;
+          background: transparent;
+          padding: 0 40px;
+          height: 90px;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -46,7 +47,7 @@ export default function HomePage() {
         }
 
         .nav-logo img {
-          height: 44px;
+          height: 65px;
           width: auto;
           filter: brightness(0) invert(1);
         }
@@ -161,11 +162,11 @@ export default function HomePage() {
         }
 
         .search-btn {
-          background: #2BAE8E;
+          background: #12A387;
           color: white;
           border: none;
           padding: 13px 26px;
-          border-radius: 12px;
+          border-radius: 14px;
           font-size: 15px;
           font-weight: 600;
           cursor: pointer;
@@ -176,7 +177,7 @@ export default function HomePage() {
           align-items: center;
           gap: 8px;
         }
-        .search-btn:hover { background: #239e7f; transform: translateY(-1px); }
+        .search-btn:hover { background: #0E8E76; transform: translateY(-1px); }
         .search-btn:active { transform: translateY(0); }
 
         .hero-stats {
@@ -235,7 +236,11 @@ export default function HomePage() {
         .city-card-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(15,44,64,0.80) 0%, rgba(0,0,0,0.05) 55%);
+          background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.0) 100%);
+          transition: background 0.3s ease;
+        }
+        .city-card:hover .city-card-overlay {
+          background: linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.30) 50%, rgba(0,0,0,0.05) 100%);
         }
 
         .city-card-label {
@@ -243,35 +248,41 @@ export default function HomePage() {
           bottom: 0;
           left: 0;
           right: 0;
-          padding: 20px 16px 16px;
+          padding: 24px 20px 20px;
           color: white;
         }
 
         .city-card-name {
-          font-size: 18px;
-          font-weight: 700;
+          font-size: 22px;
+          font-weight: 800;
           display: block;
-          letter-spacing: -0.01em;
+          letter-spacing: -0.02em;
+          text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
         .city-card-hint {
-          font-size: 12px;
-          color: rgba(255,255,255,0.65);
-          margin-top: 3px;
+          font-size: 13px;
+          color: rgba(255,255,255,0.75);
+          margin-top: 4px;
           display: block;
+          font-weight: 500;
         }
 
         .city-card-btn {
           display: inline-block;
-          margin-top: 10px;
+          margin-top: 12px;
           background: rgba(255,255,255,0.15);
-          border: 1px solid rgba(255,255,255,0.3);
+          border: 1px solid rgba(255,255,255,0.35);
           color: white;
           font-size: 12px;
-          font-weight: 500;
-          padding: 5px 12px;
+          font-weight: 600;
+          padding: 6px 14px;
           border-radius: 100px;
-          backdrop-filter: blur(4px);
+          backdrop-filter: blur(8px);
+          transition: background 0.2s;
+        }
+        .city-card:hover .city-card-btn {
+          background: rgba(255,255,255,0.25);
         }
 
         .features-grid {
@@ -408,7 +419,7 @@ export default function HomePage() {
           color: white;
           border: 1.5px solid rgba(255,255,255,0.35);
           padding: 13px 28px;
-          border-radius: 12px;
+          border-radius: 14px;
           text-decoration: none;
           font-weight: 500;
           font-size: 15px;
@@ -417,16 +428,16 @@ export default function HomePage() {
         .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
 
         .btn-accent {
-          background: #2BAE8E;
+          background: #12A387;
           color: white;
           padding: 13px 28px;
-          border-radius: 12px;
+          border-radius: 14px;
           text-decoration: none;
           font-weight: 700;
           font-size: 15px;
           transition: all 0.2s;
         }
-        .btn-accent:hover { background: #239e7f; transform: translateY(-1px); }
+        .btn-accent:hover { background: #0E8E76; transform: translateY(-1px); }
 
         @media (max-width: 768px) {
           .nav-transparent { padding: 16px 20px; }
@@ -459,24 +470,25 @@ export default function HomePage() {
 
       {/* NAV */}
       <nav className="nav-transparent">
-        <a href="/" style={{ textDecoration: 'none' }}>
-          <img
-            src="/logo.png"
-            alt="Курортрум — жильё на КМВ"
-            style={{ height: '48px', width: 'auto', filter: 'brightness(0) invert(1)' }}
-          />
+        <a href="/" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
+          <span style={{ fontSize: '24px', fontWeight: 800, color: 'white', letterSpacing: '-0.03em', fontFamily: 'inherit' }}>
+            Курорт<span style={{ color: '#2BAE8E' }}>рум</span>
+          </span>
+          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.50)', letterSpacing: '0.08em', fontFamily: 'inherit' }}>жильё на КМВ</span>
         </a>
         <div className="nav-desktop-links" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
           <a href="/catalog" className="nav-link">Жильё</a>
           <a href="/for-owners" className="nav-link">Владельцам</a>
           <a href="/auth/register" style={{
-            background: '#2BAE8E',
+            background: 'transparent',
             color: 'white',
             padding: '9px 20px',
             borderRadius: '10px',
             textDecoration: 'none',
             fontSize: '14px',
             fontWeight: 600,
+            border: '1.5px solid rgba(255,255,255,0.7)',
+            transition: 'all 0.2s',
           }}>
             Разместить объект
           </a>
@@ -627,7 +639,7 @@ export default function HomePage() {
       {/* FOOTER */}
       <footer style={{ borderTop: '1px solid #e9e9e9', padding: '28px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', background: 'white' }}>
         <a href="/" style={{ textDecoration: 'none' }}>
-          <img src="/logo.png" alt="Курортрум" style={{ height: '36px', width: 'auto' }} />
+          <img src="/logo.png" alt="Курортрум" style={{ height: '52px', width: 'auto' }} />
         </a>
         <span style={{ fontSize: '13px', color: '#9ca3af' }}>
           © 2026 · Жильё на Кавказских Минеральных Водах

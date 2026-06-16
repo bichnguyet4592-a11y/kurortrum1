@@ -1,8 +1,6 @@
 'use client'
 import { useState } from 'react'
 
-const HERO_IMAGE = '/hero.jpg.webp'
-
 export default function HomePage() {
   const [city, setCity] = useState('')
   const [type, setType] = useState('')
@@ -17,7 +15,7 @@ export default function HomePage() {
   return (
     <main style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", background: '#f8f7f4', color: '#1a1a1a', margin: 0, padding: 0 }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
         * { box-sizing: border-box; }
 
@@ -33,16 +31,29 @@ export default function HomePage() {
           position: absolute;
           top: 0; left: 0; right: 0;
           z-index: 10;
-          background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%);
+          background: linear-gradient(to bottom, rgba(0,0,0,0.50) 0%, transparent 100%);
           padding: 20px 40px;
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
 
+        .nav-logo {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          text-decoration: none;
+        }
+
+        .nav-logo img {
+          height: 44px;
+          width: auto;
+          filter: brightness(0) invert(1);
+        }
+
         .hero-section {
           position: relative;
-          min-height: 580px;
+          min-height: 600px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -64,50 +75,53 @@ export default function HomePage() {
           inset: 0;
           background: linear-gradient(
             to bottom,
-            rgba(0,0,0,0.30) 0%,
-            rgba(0,0,0,0.55) 50%,
-            rgba(0,0,0,0.65) 100%
+            rgba(15,44,64,0.45) 0%,
+            rgba(15,44,64,0.60) 50%,
+            rgba(15,44,64,0.72) 100%
           );
         }
 
         .hero-content {
           position: relative;
           z-index: 2;
-          padding: 100px 24px 60px;
-          max-width: 720px;
+          padding: 110px 24px 60px;
+          max-width: 760px;
           margin: 0 auto;
         }
 
         .hero-eyebrow {
-          display: inline-block;
-          background: rgba(255,255,255,0.15);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(43,174,142,0.15);
           backdrop-filter: blur(8px);
-          border: 1px solid rgba(255,255,255,0.25);
-          color: white;
+          border: 1px solid rgba(43,174,142,0.4);
+          color: #7ee8d0;
           font-size: 12px;
           font-weight: 500;
-          letter-spacing: 0.12em;
+          letter-spacing: 0.14em;
           text-transform: uppercase;
-          padding: 6px 14px;
+          padding: 7px 16px;
           border-radius: 100px;
-          margin-bottom: 20px;
+          margin-bottom: 24px;
         }
 
         .hero-title {
-          font-size: 48px;
-          font-weight: 700;
+          font-size: 52px;
+          font-weight: 800;
           color: white;
-          line-height: 1.15;
-          margin: 0 0 12px;
-          text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-          letter-spacing: -0.02em;
+          line-height: 1.12;
+          margin: 0 0 16px;
+          text-shadow: 0 2px 24px rgba(0,0,0,0.25);
+          letter-spacing: -0.03em;
         }
 
         .hero-subtitle {
           font-size: 17px;
-          color: rgba(255,255,255,0.80);
-          margin: 0 0 36px;
+          color: rgba(255,255,255,0.78);
+          margin: 0 0 40px;
           font-weight: 400;
+          line-height: 1.6;
         }
 
         .search-panel {
@@ -117,9 +131,14 @@ export default function HomePage() {
           display: flex;
           gap: 8px;
           align-items: center;
-          max-width: 580px;
+          max-width: 600px;
           margin: 0 auto;
-          box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+          box-shadow: 0 24px 64px rgba(0,0,0,0.28);
+        }
+
+        .search-icon {
+          color: #9ca3af;
+          flex-shrink: 0;
         }
 
         .search-select {
@@ -142,10 +161,10 @@ export default function HomePage() {
         }
 
         .search-btn {
-          background: #059669;
+          background: #2BAE8E;
           color: white;
           border: none;
-          padding: 12px 24px;
+          padding: 13px 26px;
           border-radius: 12px;
           font-size: 15px;
           font-weight: 600;
@@ -153,15 +172,20 @@ export default function HomePage() {
           white-space: nowrap;
           transition: background 0.2s, transform 0.1s;
           font-family: inherit;
+          display: flex;
+          align-items: center;
+          gap: 8px;
         }
-        .search-btn:hover { background: #047857; transform: translateY(-1px); }
+        .search-btn:hover { background: #239e7f; transform: translateY(-1px); }
         .search-btn:active { transform: translateY(0); }
 
         .hero-stats {
           display: flex;
-          gap: 32px;
+          gap: 0;
           justify-content: center;
           margin-top: 28px;
+          border-top: 1px solid rgba(255,255,255,0.15);
+          padding-top: 24px;
         }
 
         .hero-stat {
@@ -169,21 +193,16 @@ export default function HomePage() {
           font-size: 13px;
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 8px;
+          padding: 0 24px;
+          border-right: 1px solid rgba(255,255,255,0.15);
         }
-
-        .hero-stat-dot {
-          width: 4px;
-          height: 4px;
-          border-radius: 50%;
-          background: #34d399;
-          flex-shrink: 0;
-        }
+        .hero-stat:last-child { border-right: none; }
 
         .section-title {
-          font-size: 26px;
+          font-size: 28px;
           font-weight: 700;
-          color: #111827;
+          color: #0F4C5C;
           margin: 0 0 8px;
           letter-spacing: -0.02em;
         }
@@ -216,7 +235,7 @@ export default function HomePage() {
         .city-card-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.05) 60%);
+          background: linear-gradient(to top, rgba(15,44,64,0.80) 0%, rgba(0,0,0,0.05) 55%);
         }
 
         .city-card-label {
@@ -237,46 +256,60 @@ export default function HomePage() {
 
         .city-card-hint {
           font-size: 12px;
-          color: rgba(255,255,255,0.70);
-          margin-top: 2px;
+          color: rgba(255,255,255,0.65);
+          margin-top: 3px;
           display: block;
+        }
+
+        .city-card-btn {
+          display: inline-block;
+          margin-top: 10px;
+          background: rgba(255,255,255,0.15);
+          border: 1px solid rgba(255,255,255,0.3);
+          color: white;
+          font-size: 12px;
+          font-weight: 500;
+          padding: 5px 12px;
+          border-radius: 100px;
+          backdrop-filter: blur(4px);
         }
 
         .features-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 20px;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
         }
 
         .feature-card {
           background: white;
           border-radius: 16px;
-          padding: 28px 24px;
+          padding: 24px 20px;
           border: 1px solid #f0f0f0;
-          transition: box-shadow 0.2s;
+          transition: box-shadow 0.2s, transform 0.2s;
+          text-align: center;
         }
-        .feature-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+        .feature-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
 
         .feature-icon {
-          width: 48px;
-          height: 48px;
+          width: 52px;
+          height: 52px;
           border-radius: 14px;
-          background: #ecfdf5;
+          background: #e6f7f3;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 16px;
+          margin: 0 auto 14px;
         }
 
         .feature-title {
-          font-size: 16px;
+          font-size: 15px;
           font-weight: 600;
-          color: #111827;
+          color: #0F4C5C;
           margin: 0 0 6px;
         }
 
         .feature-desc {
-          font-size: 14px;
+          font-size: 13px;
           color: #6b7280;
           line-height: 1.5;
           margin: 0;
@@ -284,7 +317,7 @@ export default function HomePage() {
 
         .owner-section {
           border-radius: 24px;
-          background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);
+          background: linear-gradient(135deg, #0F4C5C 0%, #0a3d4a 50%, #083340 100%);
           padding: 56px 40px;
           text-align: center;
           position: relative;
@@ -297,7 +330,7 @@ export default function HomePage() {
           top: -80px; right: -80px;
           width: 300px; height: 300px;
           border-radius: 50%;
-          background: rgba(255,255,255,0.04);
+          background: rgba(43,174,142,0.08);
         }
 
         .owner-section::after {
@@ -306,33 +339,33 @@ export default function HomePage() {
           bottom: -60px; left: -60px;
           width: 220px; height: 220px;
           border-radius: 50%;
-          background: rgba(255,255,255,0.04);
+          background: rgba(43,174,142,0.06);
         }
 
         .owner-badge {
           display: inline-block;
-          background: rgba(255,255,255,0.12);
-          border: 1px solid rgba(255,255,255,0.2);
-          color: #6ee7b7;
+          background: rgba(43,174,142,0.15);
+          border: 1px solid rgba(43,174,142,0.35);
+          color: #7ee8d0;
           font-size: 12px;
           font-weight: 600;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          padding: 5px 12px;
+          padding: 5px 14px;
           border-radius: 100px;
           margin-bottom: 20px;
         }
 
         .owner-title {
-          font-size: 32px;
-          font-weight: 700;
+          font-size: 34px;
+          font-weight: 800;
           color: white;
           margin: 0 0 12px;
           letter-spacing: -0.02em;
         }
 
         .owner-subtitle {
-          color: rgba(255,255,255,0.65);
+          color: rgba(255,255,255,0.60);
           font-size: 16px;
           margin: 0 0 32px;
         }
@@ -356,8 +389,8 @@ export default function HomePage() {
         .perk-check {
           width: 20px; height: 20px;
           border-radius: 50%;
-          background: rgba(52,211,153,0.2);
-          border: 1px solid #34d399;
+          background: rgba(43,174,142,0.2);
+          border: 1px solid #2BAE8E;
           display: flex; align-items: center; justify-content: center;
           flex-shrink: 0;
         }
@@ -373,7 +406,7 @@ export default function HomePage() {
         .btn-outline-white {
           background: transparent;
           color: white;
-          border: 1.5px solid rgba(255,255,255,0.4);
+          border: 1.5px solid rgba(255,255,255,0.35);
           padding: 13px 28px;
           border-radius: 12px;
           text-decoration: none;
@@ -381,11 +414,11 @@ export default function HomePage() {
           font-size: 15px;
           transition: all 0.2s;
         }
-        .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+        .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
 
-        .btn-white {
-          background: white;
-          color: #065f46;
+        .btn-accent {
+          background: #2BAE8E;
+          color: white;
           padding: 13px 28px;
           border-radius: 12px;
           text-decoration: none;
@@ -393,42 +426,48 @@ export default function HomePage() {
           font-size: 15px;
           transition: all 0.2s;
         }
-        .btn-white:hover { background: #f0fdf4; transform: translateY(-1px); }
+        .btn-accent:hover { background: #239e7f; transform: translateY(-1px); }
 
         @media (max-width: 768px) {
           .nav-transparent { padding: 16px 20px; }
           .nav-desktop-links { display: none !important; }
-          .hero-title { font-size: 30px !important; }
+          .nav-logo img { height: 36px; }
+          .hero-title { font-size: 32px !important; }
           .hero-subtitle { font-size: 15px !important; }
           .hero-content { padding: 90px 20px 50px; }
           .search-panel { flex-direction: column; padding: 12px; gap: 8px; }
           .search-select { width: 100%; border-bottom: 1px solid #f0f0f0; padding-bottom: 12px; }
           .search-divider { display: none; }
-          .search-btn { width: 100%; text-align: center; padding: 13px; }
-          .hero-stats { gap: 16px; flex-wrap: wrap; }
+          .search-btn { width: 100%; justify-content: center; padding: 13px; }
+          .hero-stats { gap: 0; flex-wrap: wrap; padding-top: 16px; }
+          .hero-stat { padding: 6px 12px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); width: 100%; justify-content: center; }
           .cities-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
-          .features-grid { grid-template-columns: 1fr !important; }
+          .features-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .section-pad { padding: 40px 20px !important; }
           .owner-section { padding: 40px 20px; border-radius: 16px; }
-          .owner-title { font-size: 24px; }
+          .owner-title { font-size: 26px; }
           .owner-btns { flex-direction: column; align-items: stretch; }
-          .btn-white, .btn-outline-white { text-align: center; }
+          .btn-accent, .btn-outline-white { text-align: center; }
           .owner-perks { gap: 12px; }
           .section-title { font-size: 22px; }
+        }
+
+        @media (max-width: 480px) {
+          .features-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
       {/* NAV */}
       <nav className="nav-transparent">
-        <a href="/" style={{ fontSize: '20px', fontWeight: 700, textDecoration: 'none', color: 'white', letterSpacing: '-0.02em' }}>
-          Курорт<span style={{ color: '#34d399' }}>рум</span>
+        <a href="/" className="nav-logo">
+          <img src="/logo.png.png" alt="Курортрум — жильё на КМВ" />
         </a>
         <div className="nav-desktop-links" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
           <a href="/catalog" className="nav-link">Жильё</a>
           <a href="/for-owners" className="nav-link">Владельцам</a>
           <a href="/auth/register" style={{
-            background: 'white',
-            color: '#065f46',
+            background: '#2BAE8E',
+            color: 'white',
             padding: '9px 20px',
             borderRadius: '10px',
             textDecoration: 'none',
@@ -445,20 +484,20 @@ export default function HomePage() {
         <div className="hero-bg" />
         <div className="hero-overlay" />
         <div className="hero-content">
-          <span className="hero-eyebrow">Кавказские Минеральные Воды</span>
+          <span className="hero-eyebrow">
+            <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Кавказские Минеральные Воды
+          </span>
           <h1 className="hero-title">
-            Жильё для отдыха<br />на КМВ
+            Посуточная аренда<br />жилья на КМВ
           </h1>
           <p className="hero-subtitle">
-            Квартиры, дома и апартаменты в Кисловодске, Пятигорске,<br />Ессентуках и Железноводске — напрямую от хозяев
+            Квартиры, дома и апартаменты для отдыха<br />напрямую от собственников
           </p>
 
           <div className="search-panel">
-            <select
-              className="search-select"
-              value={city}
-              onChange={e => setCity(e.target.value)}
-            >
+            <svg className="search-icon" width="18" height="18" fill="none" stroke="#9ca3af" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+            <select className="search-select" value={city} onChange={e => setCity(e.target.value)}>
               <option value="">Все города</option>
               <option>Кисловодск</option>
               <option>Пятигорск</option>
@@ -466,46 +505,54 @@ export default function HomePage() {
               <option>Железноводск</option>
             </select>
             <div className="search-divider" />
-            <select
-              className="search-select"
-              value={type}
-              onChange={e => setType(e.target.value)}
-            >
+            <svg className="search-icon" width="18" height="18" fill="none" stroke="#9ca3af" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+            <select className="search-select" value={type} onChange={e => setType(e.target.value)}>
               <option value="">Любой тип</option>
               <option>Квартира</option>
               <option>Дом</option>
               <option>Апартаменты</option>
             </select>
             <button className="search-btn" onClick={handleSearch}>
+              <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
               Найти жильё
             </button>
           </div>
 
           <div className="hero-stats">
-            <span className="hero-stat"><span className="hero-stat-dot" />Без комиссии</span>
-            <span className="hero-stat"><span className="hero-stat-dot" />Прямой контакт</span>
-            <span className="hero-stat"><span className="hero-stat-dot" />Только КМВ</span>
+            <span className="hero-stat">
+              <svg width="14" height="14" fill="none" stroke="#2BAE8E" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Без комиссии
+            </span>
+            <span className="hero-stat">
+              <svg width="14" height="14" fill="none" stroke="#2BAE8E" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 011 2.22 2 2 0 012.96 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6z"/></svg>
+              Прямой контакт с хозяином
+            </span>
+            <span className="hero-stat">
+              <svg width="14" height="14" fill="none" stroke="#2BAE8E" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Проверенные объявления
+            </span>
           </div>
         </div>
       </section>
 
       {/* ГОРОДА */}
-      <section className="section-pad" style={{ padding: '56px 40px', maxWidth: '1100px', margin: '0 auto' }}>
-        <h2 className="section-title">Выберите город</h2>
-        <p className="section-subtitle">4 курортных города Кавказских Минеральных Вод</p>
+      <section className="section-pad" style={{ padding: '60px 40px', maxWidth: '1100px', margin: '0 auto' }}>
+        <h2 className="section-title">Популярные города КМВ</h2>
+        <p className="section-subtitle">Выберите город и найдите идеальное жильё для отдыха</p>
         <div className="cities-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
           {[
-            { name: 'Кисловодск', hint: 'Курортный парк · Колоннада', img: '/kislovodsk.jpg.webp' },
-            { name: 'Пятигорск', hint: 'Машук · Орёл', img: '/pyatigorsk.jpg.jpg' },
-            { name: 'Ессентуки', hint: 'Грязелечебница · Парк', img: '/essentuki.jpg.jpg' },
-            { name: 'Железноводск', hint: 'Галерея · Парк', img: '/zheleznovodsk.jpg.jpg' },
+            { name: 'Кисловодск', hint: 'Курортный парк · Колоннада', img: '/kislovodsk.jpg.webp', price: 'от 1 500 ₽/сутки' },
+            { name: 'Пятигорск', hint: 'Машук · Орёл', img: '/pyatigorsk.jpg.jpg', price: 'от 1 200 ₽/сутки' },
+            { name: 'Ессентуки', hint: 'Грязелечебница · Парк', img: '/essentuki.jpg.jpg', price: 'от 1 100 ₽/сутки' },
+            { name: 'Железноводск', hint: 'Галерея · Парк', img: '/zheleznovodsk.jpg.jpg', price: 'от 1 200 ₽/сутки' },
           ].map(city => (
             <a key={city.name} href={`/catalog?city=${city.name}`} className="city-card">
               <img src={city.img} alt={city.name} className="city-card-img" loading="lazy" />
               <div className="city-card-overlay" />
               <div className="city-card-label">
                 <span className="city-card-name">{city.name}</span>
-                <span className="city-card-hint">{city.hint}</span>
+                <span className="city-card-hint">{city.price}</span>
+                <span className="city-card-btn">Смотреть жильё</span>
               </div>
             </a>
           ))}
@@ -513,36 +560,30 @@ export default function HomePage() {
       </section>
 
       {/* ПРЕИМУЩЕСТВА */}
-      <section className="section-pad" style={{ padding: '0 40px 56px', maxWidth: '1100px', margin: '0 auto' }}>
+      <section className="section-pad" style={{ padding: '0 40px 60px', maxWidth: '1100px', margin: '0 auto' }}>
+        <h2 className="section-title" style={{ marginBottom: '8px' }}>Почему выбирают Курортрум?</h2>
+        <p className="section-subtitle">Простой и безопасный способ найти жильё на КМВ</p>
         <div className="features-grid">
           {[
             {
-              title: 'Только КМВ',
-              desc: 'Никаких посторонних городов — только Кисловодск, Пятигорск, Ессентуки и Железноводск.',
-              icon: (
-                <svg width="22" height="22" fill="none" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-                  <circle cx="12" cy="9" r="2.5"/>
-                </svg>
-              )
+              title: 'Проверенные объявления',
+              desc: 'Только реальные варианты от собственников',
+              icon: <svg width="24" height="24" fill="none" stroke="#2BAE8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             },
             {
-              title: 'Прямая связь с владельцем',
-              desc: 'Никаких посредников. Вы общаетесь напрямую с хозяином и договариваетесь об условиях.',
-              icon: (
-                <svg width="22" height="22" fill="none" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 011 2.22 2 2 0 012.96 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-                </svg>
-              )
+              title: 'Без комиссий',
+              desc: 'Никаких скрытых платежей и наценок',
+              icon: <svg width="24" height="24" fill="none" stroke="#2BAE8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9H9m6 6H9m3-9v12"/></svg>
             },
             {
-              title: 'Для туристов бесплатно',
-              desc: 'Поиск и просмотр объявлений полностью бесплатны. Платит только владелец за размещение.',
-              icon: (
-                <svg width="22" height="22" fill="none" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-              )
+              title: 'Прямой контакт',
+              desc: 'Общайтесь напрямую с хозяином жилья',
+              icon: <svg width="24" height="24" fill="none" stroke="#2BAE8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 011 2.22 2 2 0 012.96 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6z"/></svg>
+            },
+            {
+              title: 'Быстрое бронирование',
+              desc: 'Удобно и безопасно для туристов',
+              icon: <svg width="24" height="24" fill="none" stroke="#2BAE8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             },
           ].map(f => (
             <div key={f.title} className="feature-card">
@@ -565,7 +606,7 @@ export default function HomePage() {
               <div key={perk} className="owner-perk">
                 <div className="perk-check">
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                    <path d="M2 5l2.5 2.5L8 3" stroke="#34d399" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M2 5l2.5 2.5L8 3" stroke="#2BAE8E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
                 {perk}
@@ -574,16 +615,16 @@ export default function HomePage() {
           </div>
           <div className="owner-btns">
             <a href="/for-owners" className="btn-outline-white">Узнать подробнее</a>
-            <a href="/auth/register" className="btn-white">Разместить объект →</a>
+            <a href="/auth/register" className="btn-accent">Разместить объект →</a>
           </div>
         </div>
       </section>
 
       {/* FOOTER */}
       <footer style={{ borderTop: '1px solid #e9e9e9', padding: '28px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', background: 'white' }}>
-        <span style={{ fontSize: '14px', fontWeight: 600, color: '#111827' }}>
-          Курорт<span style={{ color: '#059669' }}>рум</span>
-        </span>
+        <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <img src="/logo.png.png" alt="Курортрум" style={{ height: '32px', width: 'auto' }} />
+        </a>
         <span style={{ fontSize: '13px', color: '#9ca3af' }}>
           © 2026 · Жильё на Кавказских Минеральных Водах
         </span>

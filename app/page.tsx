@@ -75,9 +75,9 @@ export default function HomePage() {
           inset: 0;
           background: linear-gradient(
             to bottom,
-            rgba(15,44,64,0.45) 0%,
-            rgba(15,44,64,0.60) 50%,
-            rgba(15,44,64,0.72) 100%
+            rgba(0,0,0,0.25) 0%,
+            rgba(0,0,0,0.50) 50%,
+            rgba(0,0,0,0.62) 100%
           );
         }
 
@@ -459,8 +459,11 @@ export default function HomePage() {
 
       {/* NAV */}
       <nav className="nav-transparent">
-        <a href="/" className="nav-logo">
-          <img src="/logo.png.png" alt="Курортрум — жильё на КМВ" />
+        <a href="/" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', lineHeight: 1.1 }}>
+          <span style={{ fontSize: '22px', fontWeight: 800, color: 'white', letterSpacing: '-0.03em', fontFamily: 'inherit' }}>
+            Курорт<span style={{ color: '#2BAE8E' }}>рум</span>
+          </span>
+          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.08em', fontFamily: 'inherit' }}>жильё на КМВ</span>
         </a>
         <div className="nav-desktop-links" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
           <a href="/catalog" className="nav-link">Жильё</a>
@@ -622,8 +625,10 @@ export default function HomePage() {
 
       {/* FOOTER */}
       <footer style={{ borderTop: '1px solid #e9e9e9', padding: '28px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', background: 'white' }}>
-        <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-          <img src="/logo.png.png" alt="Курортрум" style={{ height: '32px', width: 'auto' }} />
+        <a href="/" style={{ textDecoration: 'none' }}>
+          <span style={{ fontSize: '18px', fontWeight: 800, color: '#0F4C5C', letterSpacing: '-0.02em' }}>
+            Курорт<span style={{ color: '#2BAE8E' }}>рум</span>
+          </span>
         </a>
         <span style={{ fontSize: '13px', color: '#9ca3af' }}>
           © 2026 · Жильё на Кавказских Минеральных Водах

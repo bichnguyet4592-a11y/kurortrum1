@@ -112,8 +112,8 @@ export default function CatalogPage() {
 
         <div style={{ marginBottom: '28px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <h1 style={{ fontSize: '28px', fontWeight: 800, color: '#0F4C5C', margin: '0 0 4px', letterSpacing: '-0.02em' }}>Жильё на КМВ</h1>
-            <p style={{ fontSize: '15px', color: '#6b7280', margin: 0 }}>Квартиры, дома и апартаменты напрямую от хозяев</p>
+            <h1 style={{ fontSize: '28px', fontWeight: 800, color: '#0F4C5C', margin: '0 0 4px', letterSpacing: '-0.02em' }}>Ваш отдых на КМВ начинается здесь</h1>
+            <p style={{ fontSize: '15px', color: '#6b7280', margin: 0 }}>Аренда жилья напрямую от собственников — без посредников и переплат</p>
           </div>
           {activeFiltersCount > 0 && (
             <button onClick={resetFilters} style={{ background: 'none', border: '1.5px solid #e5e7eb', borderRadius: '10px', padding: '8px 16px', fontSize: '13px', color: '#6b7280', cursor: 'pointer', fontFamily: 'inherit', display: 'flex', alignItems: 'center', gap: '6px' }}>

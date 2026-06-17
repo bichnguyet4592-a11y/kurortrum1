@@ -480,12 +480,11 @@ export default function HomePage() {
 
       {/* NAV */}
       <nav className="nav-transparent">
-        <a href="/" style={{ textDecoration: 'none' }}>
-          <img
-            src="/logo-transparent.png"
-            alt="Курортрум"
-            style={{ height: '60px', width: 'auto', filter: 'brightness(0) invert(1)' }}
-          />
+        <a href="/" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
+          <span style={{ fontSize: '24px', fontWeight: 800, color: 'white', letterSpacing: '-0.03em', fontFamily: 'inherit' }}>
+            Курорт<span style={{ color: '#2BAE8E' }}>рум</span>
+          </span>
+          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.08em', fontFamily: 'inherit' }}>жильё на КМВ</span>
         </a>
         <div className="nav-desktop-links" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
           <a href="/catalog" className="nav-link">Жильё</a>

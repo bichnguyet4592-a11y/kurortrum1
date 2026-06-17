@@ -23,7 +23,8 @@ const LOGO_SVG = (
 export default function CatalogPage() {
   const [properties, setProperties] = useState<any[]>([])
   const [city, setCity] = useState('Все города')
-  const [maxPrice, setMaxPrice] = useState(10000)
+  const [maxPrice, setMaxPrice] = useState(0)
+  const [minPrice, setMinPrice] = useState(0)
   const [guests, setGuests] = useState(1)
   const [beds, setBeds] = useState(0)
   const [parking, setParking] = useState(false)
@@ -38,7 +39,7 @@ export default function CatalogPage() {
     if (c) setCity(c)
   }, [])
 
-  useEffect(() => { loadProperties() }, [city, maxPrice, guests, beds, parking, pets])
+  useEffect(() => { loadProperties() }, [city, maxPrice, minPrice, guests, beds, parking, pets])
 
   useEffect(() => {
     if (!(window as any).ymaps) {
@@ -75,24 +76,35 @@ export default function CatalogPage() {
 
     properties.forEach(p => {
       if (!p.lat || !p.lng) return
+      const bg = activeId === p.id ? '#2BAE8E' : '#0F4C5C'
       const layout = ymaps.templateLayoutFactory.createClass(
         `<div style="
-          background: ${activeId === p.id ? '#2BAE8E' : '#0F4C5C'};
+          background: ${bg};
           color: white;
-          padding: 5px 10px;
-          border-radius: 20px;
-          font-size: 12px;
-          font-weight: 700;
+          padding: 7px 14px;
+          border-radius: 24px;
+          font-size: 14px;
+          font-weight: 800;
           white-space: nowrap;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+          box-shadow: 0 3px 12px rgba(0,0,0,0.3);
           cursor: pointer;
-          font-family: -apple-system, sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+          border: 2px solid white;
+          transform: translateX(-50%);
+          position: relative;
+          letter-spacing: -0.02em;
         ">${p.price_per_night?.toLocaleString()} ₽</div>`
       )
       const placemark = new ymaps.Placemark(
         [p.lat, p.lng],
-        { balloonContent: `<b>${p.title}</b><br>${p.price_per_night?.toLocaleString()} ₽/ночь` },
-        { iconLayout: layout, iconShape: { type: 'Rectangle', coordinates: [[-40, -16], [40, 16]] } }
+        { 
+          balloonContentHeader: p.title,
+          balloonContentBody: `<b>${p.price_per_night?.toLocaleString()} ₽/ночь</b><br>${p.city}`,
+        },
+        { 
+          iconLayout: layout,
+          iconShape: { type: 'Rectangle', coordinates: [[-50, -20], [50, 20]] }
+        }
       )
       placemark.events.add('click', () => {
         window.location.href = `/property/${p.id}`
@@ -103,7 +115,9 @@ export default function CatalogPage() {
 
   async function loadProperties() {
     setLoading(true)
-    let url = `${SUPA_URL}/rest/v1/properties?select=*,property_images(url)&is_active=eq.true&price_per_night=lte.${maxPrice}&guests=gte.${guests}`
+    let url = `${SUPA_URL}/rest/v1/properties?select=*,property_images(url)&is_active=eq.true&guests=gte.${guests}`
+    if (maxPrice > 0) url += `&price_per_night=lte.${maxPrice}`
+    if (minPrice > 0) url += `&price_per_night=gte.${minPrice}`
     if (city !== 'Все города') url += `&city=eq.${encodeURIComponent(city)}`
     if (beds > 0) url += `&beds=gte.${beds}`
     if (parking) url += `&parking=eq.true`
@@ -114,10 +128,10 @@ export default function CatalogPage() {
     setLoading(false)
   }
 
-  const activeFiltersCount = [city !== 'Все города', maxPrice < 10000, guests > 1, beds > 0, parking, pets].filter(Boolean).length
+  const activeFiltersCount = [city !== 'Все города', maxPrice > 0, minPrice > 0, guests > 1, beds > 0, parking, pets].filter(Boolean).length
 
   function resetFilters() {
-    setCity('Все города'); setMaxPrice(10000); setGuests(1); setBeds(0); setParking(false); setPets(false)
+    setCity('Все города'); setMaxPrice(0); setMinPrice(0); setGuests(1); setBeds(0); setParking(false); setPets(false)
   }
 
   return (
@@ -185,8 +199,32 @@ export default function CatalogPage() {
             <input type="number" min={0} max={10} value={beds || ''} onChange={e => setBeds(Number(e.target.value))} className="filter-input" placeholder="Любое" />
           </div>
           <div style={{ gridColumn: 'span 1' }}>
-            <label className="filter-label">Цена до: <span style={{ color: '#0F4C5C', fontWeight: 700, textTransform: 'none', letterSpacing: 0 }}>{maxPrice.toLocaleString()} ₽</span></label>
-            <input type="range" min={500} max={10000} step={500} value={maxPrice} onChange={e => setMaxPrice(Number(e.target.value))} />
+            <label className="filter-label">Цена ₽/ночь</label>
+            <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+              <input
+                type="number"
+                min={0}
+                max={10000}
+                step={100}
+                value={minPrice || ''}
+                onChange={e => setMinPrice(Number(e.target.value))}
+                className="filter-input"
+                placeholder="от"
+                style={{ textAlign: 'center' }}
+              />
+              <span style={{ color: '#9ca3af', flexShrink: 0, fontSize: '13px' }}>—</span>
+              <input
+                type="number"
+                min={0}
+                max={50000}
+                step={100}
+                value={maxPrice || ''}
+                onChange={e => setMaxPrice(Number(e.target.value))}
+                className="filter-input"
+                placeholder="до"
+                style={{ textAlign: 'center' }}
+              />
+            </div>
           </div>
           <button className={`toggle-btn${parking ? ' active' : ''}`} onClick={() => setParking(!parking)} style={{ marginTop: '18px' }}>
             <div className="toggle-dot" />🚗 Парковка

@@ -480,11 +480,8 @@ export default function HomePage() {
 
       {/* NAV */}
       <nav className="nav-transparent">
-        <a href="/" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
-          <span style={{ fontSize: '24px', fontWeight: 800, color: 'white', letterSpacing: '-0.03em', fontFamily: 'inherit' }}>
-            Курорт<span style={{ color: '#2BAE8E' }}>рум</span>
-          </span>
-          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.08em', fontFamily: 'inherit' }}>жильё на КМВ</span>
+        <a href="/" style={{ textDecoration: 'none' }}>
+          <img src="/logo.svg" alt="Курортрум" style={{ height: '56px', width: 'auto', filter: 'brightness(0) invert(1)' }} />
         </a>
         <div className="nav-desktop-links" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
           <a href="/catalog" className="nav-link">Жильё</a>
@@ -649,7 +646,7 @@ export default function HomePage() {
       {/* FOOTER */}
       <footer style={{ borderTop: '1px solid #e9e9e9', padding: '28px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', background: 'white' }}>
         <a href="/" style={{ textDecoration: 'none' }}>
-          <img src="/logo-transparent.png" alt="Курортрум" style={{ height: '48px', width: 'auto' }} />
+          <img src="/logo.svg" alt="Курортрум" style={{ height: '52px', width: 'auto' }} />
         </a>
         <span style={{ fontSize: '13px', color: '#9ca3af' }}>
           © 2026 · Жильё на Кавказских Минеральных Водах

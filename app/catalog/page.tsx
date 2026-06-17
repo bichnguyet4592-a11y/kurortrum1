@@ -76,38 +76,43 @@ export default function CatalogPage() {
 
     properties.forEach(p => {
       if (!p.lat || !p.lng) return
-      const bg = activeId === p.id ? '#2BAE8E' : '#0F4C5C'
-      const layout = ymaps.templateLayoutFactory.createClass(
-        `<div style="
-          background: ${bg};
-          color: white;
-          padding: 7px 14px;
-          border-radius: 24px;
-          font-size: 14px;
-          font-weight: 800;
-          white-space: nowrap;
-          box-shadow: 0 3px 12px rgba(0,0,0,0.3);
-          cursor: pointer;
-          font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-          border: 2px solid white;
-          transform: translateX(-50%);
-          position: relative;
-          letter-spacing: -0.02em;
-        ">${p.price_per_night?.toLocaleString()} ₽</div>`
+      const isActive = activeId === p.id
+      const bg = isActive ? '#2BAE8E' : '#0F4C5C'
+      const price = p.price_per_night?.toLocaleString() + ' ₽'
+
+      const MyLayout = ymaps.templateLayoutFactory.createClass(
+        '<div style="' +
+          'background:' + bg + ';' +
+          'color:white;' +
+          'padding:8px 16px;' +
+          'border-radius:100px;' +
+          'font-size:14px;' +
+          'font-weight:800;' +
+          'white-space:nowrap;' +
+          'box-shadow:0 4px 14px rgba(0,0,0,0.35);' +
+          'border:2.5px solid white;' +
+          'cursor:pointer;' +
+          'font-family:-apple-system,BlinkMacSystemFont,sans-serif;' +
+          'letter-spacing:-0.02em;' +
+          'user-select:none;' +
+        '">' + price + '</div>'
       )
+
       const placemark = new ymaps.Placemark(
         [p.lat, p.lng],
-        { 
-          balloonContentHeader: p.title,
-          balloonContentBody: `<b>${p.price_per_night?.toLocaleString()} ₽/ночь</b><br>${p.city}`,
+        {
+          balloonContentHeader: '<b style="color:#0F4C5C">' + p.title + '</b>',
+          balloonContentBody: p.price_per_night?.toLocaleString() + ' ₽/ночь · ' + p.city,
+          balloonContentFooter: '<a href="/property/' + p.id + '" style="color:#2BAE8E;font-weight:600;">Смотреть объект →</a>',
         },
-        { 
-          iconLayout: layout,
-          iconShape: { type: 'Rectangle', coordinates: [[-50, -20], [50, 20]] }
+        {
+          iconLayout: MyLayout,
+          iconShape: { type: 'Rectangle', coordinates: [[-55, -20], [55, 20]] },
+          hideIconOnBalloonOpen: false,
         }
       )
       placemark.events.add('click', () => {
-        window.location.href = `/property/${p.id}`
+        setActiveId(p.id)
       })
       map.geoObjects.add(placemark)
     })

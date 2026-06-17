@@ -81,7 +81,7 @@ export default function HomePage() {
                     />
                   </div>
                   <div>
-                    <label style={{ fontSize: '13px', fontWeight: 500, color: '#374151', display: 'block', marginBottom: '6px' }}>Пожелания <span style={{ color: '#9ca3af', fontWeight: 400' }}>(необязательно)</span></label>
+                    <label style={{ fontSize: '13px', fontWeight: 500, color: '#374151', display: 'block', marginBottom: '6px' }}>Пожелания <span style={{ color: '#9ca3af', fontWeight: 400 }}>(необязательно)</span></label>
                     <textarea
                       placeholder="Например: рядом с парком, с парковкой, до 5000 ₽"
                       value={wishes}

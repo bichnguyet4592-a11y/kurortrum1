@@ -152,3 +152,4 @@ export default function PropertyPage({ params }: { params: { id: string } }) {
     </main>
   )
 }
+

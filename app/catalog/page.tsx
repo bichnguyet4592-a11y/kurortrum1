@@ -30,7 +30,7 @@ export default function CatalogPage() {
   const [parking, setParking] = useState(false)
   const [pets, setPets] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [activeId, setActiveId] = useState<string | null>(null)
+  const [mobileView, setMobileView] = useState<'list' | 'map'>('list')
   const [mapReady, setMapReady] = useState(false)
 
   useEffect(() => {
@@ -84,17 +84,20 @@ export default function CatalogPage() {
         '<div style="' +
           'background:' + bg + ';' +
           'color:white;' +
-          'padding:8px 16px;' +
+          'padding:8px 18px;' +
           'border-radius:100px;' +
-          'font-size:14px;' +
+          'font-size:13px;' +
           'font-weight:800;' +
           'white-space:nowrap;' +
           'box-shadow:0 4px 14px rgba(0,0,0,0.35);' +
           'border:2.5px solid white;' +
           'cursor:pointer;' +
           'font-family:-apple-system,BlinkMacSystemFont,sans-serif;' +
-          'letter-spacing:-0.02em;' +
+          'letter-spacing:0;' +
           'user-select:none;' +
+          'min-width:80px;' +
+          'text-align:center;' +
+          'display:inline-block;' +
         '">' + price + '</div>'
       )
 
@@ -107,7 +110,7 @@ export default function CatalogPage() {
         },
         {
           iconLayout: MyLayout,
-          iconShape: { type: 'Rectangle', coordinates: [[-55, -20], [55, 20]] },
+          iconShape: { type: 'Rectangle', coordinates: [[-70, -22], [70, 22]] },
           hideIconOnBalloonOpen: false,
         }
       )
@@ -151,20 +154,26 @@ export default function CatalogPage() {
         .toggle-btn.active { border-color: #2BAE8E; background: #e6f7f3; color: #0F4C5C; font-weight: 600; }
         .toggle-dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #d1d5db; transition: all 0.2s; flex-shrink: 0; }
         .toggle-btn.active .toggle-dot { background: #2BAE8E; border-color: #2BAE8E; }
-        input[type=range] { accent-color: #2BAE8E; width: 100%; }
+        .mobile-toggle { display: none; }
+        @media (max-width: 900px) { .mobile-toggle { display: flex !important; } }
         .prop-card { background: white; border-radius: 12px; overflow: hidden; border: 1.5px solid #f0f0f0; transition: all 0.2s; text-decoration: none; color: inherit; display: flex; gap: 0; cursor: pointer; }
         .prop-card:hover, .prop-card.active { border-color: #2BAE8E; box-shadow: 0 4px 16px rgba(43,174,142,0.15); }
         .prop-card.active { background: #f0fdf9; }
         @keyframes spin { to { transform: rotate(360deg); } }
         @media (max-width: 900px) {
-          .catalog-layout { flex-direction: column !important; }
-          .map-panel { display: none !important; }
-          .list-panel { width: 100% !important; max-width: 100% !important; }
+          .catalog-layout { flex-direction: column !important; height: auto !important; }
+          .map-panel { height: 400px !important; display: block !important; }
+          .list-panel { width: 100% !important; max-width: 100% !important; height: auto !important; overflow: visible !important; }
+          .map-panel.hidden { display: none !important; }
+          .list-panel.hidden { display: none !important; }
         }
         @media (max-width: 768px) {
           .catalog-nav { padding: 0 16px !important; }
           .catalog-filters { padding: 12px 16px !important; }
           .filters-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (max-width: 480px) {
+          .filters-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
@@ -243,13 +252,27 @@ export default function CatalogPage() {
             × Сбросить фильтры ({activeFiltersCount})
           </button>
         )}
+        <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }} className="mobile-toggle">
+          <button
+            onClick={() => setMobileView('list')}
+            style={{ flex: 1, padding: '8px', borderRadius: '8px', border: '1.5px solid', borderColor: mobileView === 'list' ? '#2BAE8E' : '#e5e7eb', background: mobileView === 'list' ? '#e6f7f3' : 'white', color: mobileView === 'list' ? '#0F4C5C' : '#6b7280', fontWeight: 600, fontSize: '13px', cursor: 'pointer', fontFamily: 'inherit' }}
+          >
+            ☰ Список
+          </button>
+          <button
+            onClick={() => setMobileView('map')}
+            style={{ flex: 1, padding: '8px', borderRadius: '8px', border: '1.5px solid', borderColor: mobileView === 'map' ? '#2BAE8E' : '#e5e7eb', background: mobileView === 'map' ? '#e6f7f3' : 'white', color: mobileView === 'map' ? '#0F4C5C' : '#6b7280', fontWeight: 600, fontSize: '13px', cursor: 'pointer', fontFamily: 'inherit' }}
+          >
+            🗺 Карта
+          </button>
+        </div>
       </div>
 
       {/* ОСНОВНОЙ LAYOUT */}
       <div className="catalog-layout" style={{ display: 'flex', flex: 1, overflow: 'hidden', height: 'calc(100vh - 72px - 80px)' }}>
 
         {/* СПИСОК */}
-        <div className="list-panel" style={{ width: '420px', flexShrink: 0, overflowY: 'auto', padding: '20px 16px 20px 32px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div className={`list-panel${mobileView === 'map' ? ' hidden' : ''}`} style={{ width: '420px', flexShrink: 0, overflowY: 'auto', padding: '20px 16px 20px 32px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {!loading && (
             <div style={{ fontSize: '13px', color: '#6b7280', marginBottom: '4px' }}>
               Найдено: <strong style={{ color: '#0F4C5C' }}>{properties.length}</strong> объектов
@@ -304,7 +327,7 @@ export default function CatalogPage() {
         </div>
 
         {/* КАРТА */}
-        <div className="map-panel" style={{ flex: 1, position: 'relative' }}>
+        <div className={`map-panel${mobileView === 'list' ? ' hidden' : ''}`} style={{ flex: 1, position: 'relative' }}>
           <div id="ymap" style={{ width: '100%', height: '100%' }} />
           {!mapReady && (
             <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#e6f7f3', flexDirection: 'column', gap: '12px' }}>

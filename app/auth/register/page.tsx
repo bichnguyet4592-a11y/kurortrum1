@@ -2,8 +2,8 @@
 import { useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  'https://okaibdzoeteccckmgyvy.supabase.co',
+  'sb_publishable_JjjwbGDtHqQs4f1cygvYAA_csqm9wxt'
 )
 
 export default function RegisterPage() {
@@ -38,14 +38,14 @@ export default function RegisterPage() {
   }
 
   if (success) return (
-    <main style={{ fontFamily: 'sans-serif', minHeight: '100vh', background: '#f9fafb', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <main style={{ fontFamily: 'sans-serif', minHeight: '100vh', background: '#f8f7f4', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ background: 'white', border: '1px solid #e5e7eb', borderRadius: '16px', padding: '40px', maxWidth: '400px', width: '100%', textAlign: 'center' }}>
         <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
         <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '8px' }}>Почти готово!</h2>
         <p style={{ color: '#6b7280', fontSize: '14px', marginBottom: '24px' }}>
           Мы отправили письмо на {email}. Подтвердите почту и войдите в личный кабинет.
         </p>
-        <a href="/auth/login" style={{ background: '#059669', color: 'white', padding: '12px 24px', borderRadius: '10px', textDecoration: 'none', fontSize: '15px' }}>
+        <a href="/auth/login" style={{ background: '#2BAE8E', color: 'white', padding: '12px 24px', borderRadius: '10px', textDecoration: 'none', fontSize: '15px' }}>
           Войти
         </a>
       </div>
@@ -53,10 +53,10 @@ export default function RegisterPage() {
   )
 
   return (
-    <main style={{ fontFamily: 'sans-serif', minHeight: '100vh', background: '#f9fafb', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <main style={{ fontFamily: 'sans-serif', minHeight: '100vh', background: '#f8f7f4', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ background: 'white', border: '1px solid #e5e7eb', borderRadius: '16px', padding: '40px', maxWidth: '400px', width: '100%' }}>
-        <a href="/" style={{ fontSize: '20px', fontWeight: 600, textDecoration: 'none', color: '#111827', display: 'block', marginBottom: '24px' }}>
-          Курорт<span style={{ color: '#059669' }}>рум</span>
+        <a href="/" style={{ fontSize: '20px', fontWeight: 600, textDecoration: 'none', color: '#1a1a1a', display: 'block', marginBottom: '24px' }}>
+          Курорт<span style={{ color: '#2BAE8E' }}>рум</span>
         </a>
         <h1 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '6px' }}>Регистрация владельца</h1>
         <p style={{ fontSize: '14px', color: '#6b7280', marginBottom: '24px' }}>7 дней бесплатно · Без комиссии</p>
@@ -97,7 +97,7 @@ export default function RegisterPage() {
           <button
             onClick={handleRegister}
             disabled={loading}
-            style={{ background: '#059669', color: 'white', border: 'none', padding: '13px', borderRadius: '10px', fontSize: '15px', fontWeight: 500, cursor: 'pointer', opacity: loading ? 0.7 : 1 }}
+            style={{ background: '#2BAE8E', color: 'white', border: 'none', padding: '13px', borderRadius: '10px', fontSize: '15px', fontWeight: 500, cursor: 'pointer', opacity: loading ? 0.7 : 1 }}
           >
             {loading ? 'Регистрируем...' : 'Зарегистрироваться'}
           </button>
@@ -105,7 +105,7 @@ export default function RegisterPage() {
 
         <div style={{ textAlign: 'center', marginTop: '20px', fontSize: '14px', color: '#6b7280' }}>
           Уже есть аккаунт?{' '}
-          <a href="/auth/login" style={{ color: '#059669', textDecoration: 'none' }}>Войти</a>
+          <a href="/auth/login" style={{ color: '#2BAE8E', textDecoration: 'none' }}>Войти</a>
         </div>
       </div>
     </main>

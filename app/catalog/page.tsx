@@ -32,7 +32,7 @@ export default function CatalogPage() {
   const [loading, setLoading] = useState(true)
   const [mobileView, setMobileView] = useState<'list' | 'map'>('list')
   const [mapReady, setMapReady] = useState(false)
-
+  const [activeId, setActiveId] = useState<string | null>(null)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     const c = params.get('city')
